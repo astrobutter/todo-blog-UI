@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import Header from "../components/header";
 import AddTodo from "../containers/addTodo";
 import TodoList from "../containers/todoList";
 import fetch from "node-fetch";
@@ -9,7 +8,7 @@ export default function Home() {
 
   const [todos, setTodos] = useState([]);
   const getResult = async() =>{
-    const result = await fetch('http://localhost:1337/api/to-dos', { method: 'GET'});
+    const result = await fetch('https://todo-blog.onrender.com/api/to-dos', { method: 'GET'});
     const  res = await result.json();
     console.log("fetch",res);
 
@@ -25,7 +24,7 @@ export default function Home() {
   const addTodo = async (todoText) => {
     console.log(todoText);
     if (todoText.length > 0) {
-      const result = await fetch('http://localhost:1337/api/to-dos', { 
+      const result = await fetch('https://todo-blog.onrender.com/api/to-dos', { 
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +45,7 @@ export default function Home() {
   const deleteTodoItem = async (todo) => {
     if (confirm("Do you really want to delete this item?")) {
       console.log('todo id: ',todo.id);
-      fetch('http://localhost:1337/api/to-dos/' + todo.id, {
+      fetch('https://todo-blog.onrender.com/api/to-dos' + todo.id, {
         method: 'DELETE',
       })
       .then(res => res.json())
@@ -62,7 +61,7 @@ export default function Home() {
     const newTodoText = prompt("Enter new todo text or description:");
     console.log('newtext: ', newTodoText);
     if (newTodoText != null) {
-      const result = await fetch(`http://localhost:1337/api/to-dos/${todo.id}`, {
+      const result = await fetch(`https://todo-blog.onrender.com/api/to-dos/${todo.id}`, {
         method: 'PUT',
         headers: {
           "Content-Type": "application/json",
@@ -84,9 +83,9 @@ export default function Home() {
     <div>
       <Head>
         <title>ToDo app</title>
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon (6).ico" /> */}
+        <link rel="icon" href="/favicon (8).ico" />
       </Head>
-      <Header />
       <main className="main">
         <AddTodo addTodo={addTodo} />
         <TodoList
