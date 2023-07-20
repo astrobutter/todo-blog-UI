@@ -45,7 +45,7 @@ export default function Home() {
   const deleteTodoItem = async (todo) => {
     if (confirm("Do you really want to delete this item?")) {
       console.log('todo id: ',todo.id);
-      fetch('https://todo-blog.onrender.com/api/to-dos' + todo.id, {
+      const result = await fetch(`https://todo-blog.onrender.com/api/to-dos/${todo.id}`, {
         method: 'DELETE',
       })
       .then(res => res.json())
